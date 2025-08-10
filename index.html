@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALORANT TROLL GACHA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">VALORANT TROLL GACHA</h1>
+            <p class="subtitle">VALORANTフルパトロールガチャ</p>
+        </header>
+
+        <main class="main">
+            <section class="hero">
+                <h2 class="hero-title">VALORANTは、もっと自由だ。</h2>
+                <p class="hero-description">
+                    VALORANTフルパトロールガチャへようこそ！<br>
+                    5人のプレイヤー名を入力するだけで、エージェントと<br>
+                    カオスな「縛りプレイ」をランダムに決定します。<br>
+                    今日のプレイにスパイスを加えよう！
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="startGacha">ガチャを始める</button>
+                    <button class="btn btn-secondary" id="showHowTo">遊び方</button>
+                </div>
+            </section>
+
+            <section class="setup-section" id="setupSection" style="display: none;">
+                <h3 class="section-title">チーム作成</h3>
+                <p class="section-description">5人のプレイヤー名を入力してチームを編成しよう。</p>
+                
+                <div class="player-inputs">
+                    <div class="player-input">
+                        <label for="player1">プレイヤー1</label>
+                        <input type="text" id="player1" placeholder="プレイヤー名を入力">
+                    </div>
+                    <div class="player-input">
+                        <label for="player2">プレイヤー2</label>
+                        <input type="text" id="player2" placeholder="プレイヤー名を入力">
+                    </div>
+                    <div class="player-input">
+                        <label for="player3">プレイヤー3</label>
+                        <input type="text" id="player3" placeholder="プレイヤー名を入力">
+                    </div>
+                    <div class="player-input">
+                        <label for="player4">プレイヤー4</label>
+                        <input type="text" id="player4" placeholder="プレイヤー名を入力">
+                    </div>
+                    <div class="player-input">
+                        <label for="player5">プレイヤー5</label>
+                        <input type="text" id="player5" placeholder="プレイヤー名を入力">
+                    </div>
+                </div>
+
+                <div class="troll-count">
+                    <label for="trollCount">トロール条件の数</label>
+                    <select id="trollCount">
+                        <option value="2">2人</option>
+                        <option value="3">3人</option>
+                        <option value="4">4人</option>
+                        <option value="5">5人</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" id="executeGacha">ガチャ実行</button>
+            </section>
+
+            <section class="result-section" id="resultSection" style="display: none;">
+                <h3 class="section-title">ガチャ結果</h3>
+                <p class="section-description">エージェントと、選ばれた人数に課せられる「縛りプレイ」をランダムに決定！</p>
+                
+                <div class="results">
+                    <div class="team-results">
+                        <h4>チーム編成</h4>
+                        <div class="team-members" id="teamMembers"></div>
+                    </div>
+                    
+                    <div class="troll-results">
+                        <h4>トロール条件</h4>
+                        <div class="troll-conditions" id="trollConditions"></div>
+                    </div>
+                </div>
+
+                <div class="result-buttons">
+                    <button class="btn btn-primary" id="saveImage">画像保存</button>
+                    <button class="btn btn-secondary" id="retryGacha">もう一度</button>
+                </div>
+            </section>
+
+            <section class="how-to-section" id="howToSection" style="display: none;">
+                <h3 class="section-title">遊び方</h3>
+                <div class="how-to-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>チーム作成</h4>
+                            <p>5人のプレイヤー名を入力してチームを編成しよう。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>ガチャ実行</h4>
+                            <p>エージェントと、選んだ人数に課せられる「縛りプレイ」をランダムに決定！</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>結果共有</h4>
+                            <p>生成された結果を画像として保存し、SNSで友達に共有しよう。</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" id="closeHowTo">閉じる</button>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link">排出トロール一覧</a>
+                <a href="#" class="footer-link">縛りプレイ案募集</a>
+                <a href="#" class="footer-link">開発者</a>
+                <a href="#" class="footer-link">運営チーム</a>
+            </div>
+            <p class="copyright">© 2025 フルパトロールガチャ. Citrus e-sports</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
