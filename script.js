@@ -104,6 +104,17 @@ async function loadTrollData() {
 function setupEventListeners() {
     console.log('イベントリスナー設定開始');
     
+    // プレイヤー名入力フィールドのオートコンプリートを無効化
+    for (let i = 1; i <= 5; i++) {
+        const playerInput = document.getElementById(`player${i}`);
+        if (playerInput) {
+            playerInput.setAttribute('autocomplete', 'off');
+            playerInput.setAttribute('autocorrect', 'off');
+            playerInput.setAttribute('autocapitalize', 'off');
+            playerInput.setAttribute('spellcheck', 'false');
+        }
+    }
+    
     if (startGachaBtn) {
         startGachaBtn.addEventListener('click', showSetupSection);
         console.log('startGachaBtn リスナー設定完了');
@@ -303,7 +314,7 @@ function generateTrollList(container) {
         sectionDiv.appendChild(listDiv);
         container.appendChild(sectionDiv);
         
-        // レジェンドの場合、特別なログを出力
+        // レジェンドの場合、特別なログを出力とスタイルを直接適用
         if (rarity === 'レジェンド') {
             console.log('レジェンドセクション作成:', sectionDiv.className);
             console.log('レジェンドタイトル作成:', titleDiv.className);
@@ -418,7 +429,7 @@ function getRarityClass(rarity) {
         case 'レジェンド':
             return 'rarity-legend';
         default:
-            return 'rarity-normal';
+            return 'rarity-legend';
     }
 }
 

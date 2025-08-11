@@ -160,8 +160,9 @@ body {
     padding: 12px 16px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -169,11 +170,45 @@ body {
 .player-input input:focus {
     outline: none;
     border-color: #ff4655;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15) !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .player-input input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ブラウザの自動入力機能による背景色変更を防ぐ */
+.player-input input:-webkit-autofill,
+.player-input input:-webkit-autofill:hover,
+.player-input input:-webkit-autofill:focus,
+.player-input input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.1) inset !important;
+    -webkit-text-fill-color: white !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* オートコンプリート機能による背景色変更を防ぐ */
+.player-input input:-webkit-autofill,
+.player-input input:-webkit-autofill:hover,
+.player-input input:-webkit-autofill:focus,
+.player-input input:-webkit-autofill:active,
+.player-input input[autocomplete]:-webkit-autofill,
+.player-input input[autocomplete]:-webkit-autofill:hover,
+.player-input input[autocomplete]:-webkit-autofill:focus,
+.player-input input[autocomplete]:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.1) inset !important;
+    -webkit-text-fill-color: white !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Firefox用のオートコンプリート対策 */
+.player-input input:-moz-autofill,
+.player-input input:-moz-autofill:focus {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
 }
 
 .troll-count {
@@ -618,173 +653,8 @@ body {
     background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
 }
 
-/* レジェンドの色をマゼンタに変更 */
-.rarity-section.legend,
-#trollListModal .rarity-section.legend {
-    border: 2px solid transparent !important;
-    background: 
-        linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 0, 255, 0.02) 25%, rgba(255, 20, 147, 0.02) 50%, rgba(255, 105, 180, 0.02) 75%, rgba(255, 0, 255, 0.02) 100%),
-        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-clip: padding-box, border-box !important;
-    animation: modal-legend-magenta 4s ease-in-out infinite !important;
-    position: relative !important;
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3) !important;
-}
-
-.rarity-section.legend::before,
-#trollListModal .rarity-section.legend::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -2px !important;
-    left: -2px !important;
-    right: -2px !important;
-    bottom: -2px !important;
-    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-size: 400% 400% !important;
-    animation: magenta-shift 3s ease-in-out infinite !important;
-    z-index: -1 !important;
-    border-radius: 17px !important;
-    filter: blur(1px) !important;
-}
-
-.rarity-section.legend .rarity-section-title,
-#trollListModal .rarity-section.legend .rarity-section-title {
-    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-size: 400% 400% !important;
-    animation: magenta-shift 3s ease-in-out infinite, modal-legend-magenta-glow 2s ease-in-out infinite alternate !important;
-    font-weight: 700 !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
-    position: relative !important;
-    z-index: 1 !important;
-    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5) !important;
-}
-
-/* より具体的なセレクタを追加 */
-#trollListModal .rarity-section.legend {
-    border: 2px solid transparent !important;
-    background: 
-        linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 0, 255, 0.02) 25%, rgba(255, 20, 147, 0.02) 50%, rgba(255, 105, 180, 0.02) 75%, rgba(255, 0, 255, 0.02) 100%),
-        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-clip: padding-box, border-box !important;
-    animation: modal-legend-magenta 4s ease-in-out infinite !important;
-    position: relative !important;
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3) !important;
-}
-
-#trollListModal .rarity-section.legend::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -2px !important;
-    left: -2px !important;
-    right: -2px !important;
-    bottom: -2px !important;
-    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-size: 400% 400% !important;
-    animation: magenta-shift 3s ease-in-out infinite !important;
-    z-index: -1 !important;
-    border-radius: 17px !important;
-    filter: blur(1px) !important;
-}
-
-#trollListModal .rarity-section.legend .rarity-section-title {
-    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-size: 400% 400% !important;
-    animation: magenta-shift 3s ease-in-out infinite, modal-legend-magenta-glow 2s ease-in-out infinite alternate !important;
-    font-weight: 700 !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
-    position: relative !important;
-    z-index: 1 !important;
-    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5) !important;
-}
-
-#trollListModal .troll-item.legend {
-    border: 2px solid transparent !important;
-    background: 
-        linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.05) 25%, rgba(255, 20, 147, 0.05) 50%, rgba(255, 105, 180, 0.05) 75%, rgba(255, 0, 255, 0.05) 100%),
-        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-clip: padding-box, border-box !important;
-    animation: modal-item-legend-magenta 3s ease-in-out infinite !important;
-    position: relative !important;
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3) !important;
-}
-
-#trollListModal .troll-item.legend::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -2px !important;
-    left: -2px !important;
-    right: -2px !important;
-    bottom: -2px !important;
-    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-size: 400% 400% !important;
-    animation: magenta-shift 3s ease-in-out infinite !important;
-    z-index: -1 !important;
-    border-radius: 12px !important;
-    filter: blur(0.5px) !important;
-}
-
-#trollListModal .troll-item.legend:hover {
-    animation: modal-item-legend-magenta 1.5s ease-in-out infinite !important;
-    transform: translateY(-3px) !important;
-    box-shadow: 0 12px 35px rgba(255, 0, 255, 0.5) !important;
-}
-
-/* マゼンタ用のアニメーション */
-@keyframes magenta-shift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes modal-legend-magenta {
-    0% {
-        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
-    }
-    25% {
-        box-shadow: 0 0 15px rgba(255, 20, 147, 0.2);
-    }
-    50% {
-        box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
-    }
-    75% {
-        box-shadow: 0 0 15px rgba(218, 112, 214, 0.2);
-    }
-    100% {
-        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
-    }
-}
-
-@keyframes modal-legend-magenta-glow {
-    from {
-        box-shadow: 0 0 15px rgba(255, 0, 255, 0.4), 0 0 25px rgba(255, 0, 255, 0.2);
-    }
-    to {
-        box-shadow: 0 0 25px rgba(255, 0, 255, 0.6), 0 0 35px rgba(255, 0, 255, 0.3);
-    }
-}
-
-@keyframes modal-item-legend-magenta {
-    0% {
-        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
-    }
-    25% {
-        box-shadow: 0 0 8px rgba(255, 20, 147, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
-    }
-    75% {
-        box-shadow: 0 0 8px rgba(218, 112, 214, 0.3);
-    }
-    100% {
-        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
-    }
+.rarity-section.legend .rarity-section-title {
+    background: linear-gradient(135deg, #ff00ff 0%, #ff1493 100%);
 }
 
 .troll-list {
@@ -820,38 +690,6 @@ body {
 
 .troll-item.ultra-rare {
     border-left-color: #f6ad55;
-}
-
-.troll-item.legend {
-    border: 2px solid transparent !important;
-    background: 
-        linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.05) 25%, rgba(255, 20, 147, 0.05) 50%, rgba(255, 105, 180, 0.05) 75%, rgba(255, 0, 255, 0.05) 100%),
-        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-clip: padding-box, border-box !important;
-    animation: modal-item-legend-magenta 3s ease-in-out infinite !important;
-    position: relative !important;
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3) !important;
-}
-
-.troll-item.legend::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -2px !important;
-    left: -2px !important;
-    right: -2px !important;
-    bottom: -2px !important;
-    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
-    background-size: 400% 400% !important;
-    animation: magenta-shift 3s ease-in-out infinite !important;
-    z-index: -1 !important;
-    border-radius: 12px !important;
-    filter: blur(0.5px) !important;
-}
-
-.troll-item.legend:hover {
-    animation: modal-item-legend-magenta 1.5s ease-in-out infinite !important;
-    transform: translateY(-3px) !important;
-    box-shadow: 0 12px 35px rgba(255, 0, 255, 0.5) !important;
 }
 
 @keyframes modal-item-legend-magenta {
@@ -1040,5 +878,63 @@ body {
 @keyframes spin {
     to {
         transform: rotate(360deg);
+    }
+} 
+
+/* マゼンタ用のアニメーション */
+@keyframes magenta-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes modal-legend-magenta {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+    25% {
+        box-shadow: 0 0 15px rgba(255, 20, 147, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+    }
+    75% {
+        box-shadow: 0 0 15px rgba(218, 112, 214, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+}
+
+@keyframes modal-legend-magenta-glow {
+    from {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.4), 0 0 25px rgba(255, 0, 255, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(255, 0, 255, 0.6), 0 0 35px rgba(255, 0, 255, 0.3);
+    }
+}
+
+@keyframes modal-item-legend-magenta {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+    }
+    25% {
+        box-shadow: 0 0 8px rgba(255, 20, 147, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+    }
+    75% {
+        box-shadow: 0 0 8px rgba(218, 112, 214, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
     }
 } 
