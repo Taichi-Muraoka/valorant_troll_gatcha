@@ -16,7 +16,7 @@
 
         <main class="main">
             <section class="hero">
-                <h2 class="hero-title">VALORANTは、もっと自由だ。</h2>
+                <h2 class="hero-title">VALORANTは、クソゲーだ。</h2>
                 <p class="hero-description">
                     VALORANTフルパトロールガチャへようこそ！<br>
                     5人のプレイヤー名を入力するだけで、エージェントと<br>
@@ -122,13 +122,25 @@
 
         <footer class="footer">
             <div class="footer-links">
-                <a href="#" class="footer-link">排出トロール一覧</a>
-                <a href="#" class="footer-link">縛りプレイ案募集</a>
-                <a href="#" class="footer-link">開発者</a>
-                <a href="#" class="footer-link">運営チーム</a>
+                <a href="#" class="footer-link" id="showTrollList">排出トロール一覧</a>
             </div>
-            <p class="copyright">© 2025 フルパトロールガチャ. Citrus e-sports</p>
+            <p class="copyright">© 2025 フルパトロールガチャ</p>
         </footer>
+    </div>
+
+    <!-- トロール一覧モーダル -->
+    <div class="modal-overlay" id="trollListModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">排出トロール一覧</h3>
+                <button class="modal-close" id="closeTrollListModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="troll-list-container" id="trollListContainer">
+                    <!-- トロール一覧がここに表示されます -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

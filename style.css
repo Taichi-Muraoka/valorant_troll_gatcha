@@ -254,25 +254,60 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .player-name {
     font-weight: 600;
     color: #ffffff;
+    font-size: 1rem;
+}
+
+.agent-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+}
+
+.agent-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .agent-name {
     background: linear-gradient(135deg, #ff4655 0%, #ff6b7a 100%);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
     font-weight: 600;
     color: white;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .troll-condition {
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+.troll-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
@@ -287,10 +322,94 @@ body {
     width: fit-content;
 }
 
+.troll-rarity {
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .troll-text {
     color: #ffffff;
     font-weight: 500;
     line-height: 1.4;
+}
+
+/* レアリティ別スタイル */
+.rarity-normal {
+    border-left-color: #a0aec0;
+}
+
+.rarity-normal .troll-rarity {
+    background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+}
+
+.rarity-rare {
+    border-left-color: #4299e1;
+}
+
+.rarity-rare .troll-rarity {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+}
+
+.rarity-super-rare {
+    border-left-color: #9f7aea;
+}
+
+.rarity-super-rare .troll-rarity {
+    background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+}
+
+.rarity-ultra-rare {
+    border-left-color: #f6ad55;
+}
+
+.rarity-ultra-rare .troll-rarity {
+    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+}
+
+.rarity-legend {
+    border-left: 4px solid;
+    border-image: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) 1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.05) 25%, rgba(255, 20, 147, 0.05) 50%, rgba(255, 105, 180, 0.05) 75%, rgba(255, 0, 255, 0.05) 100%);
+    animation: legend-magenta 3s ease-in-out infinite;
+}
+
+.rarity-legend .troll-rarity {
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd);
+    background-size: 400% 400%;
+    animation: magenta-shift 2s ease-in-out infinite, legend-magenta-glow 2s ease-in-out infinite alternate;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes legend-magenta {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    }
+    25% {
+        box-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+    }
+    75% {
+        box-shadow: 0 0 10px rgba(218, 112, 214, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    }
+}
+
+@keyframes legend-magenta-glow {
+    from {
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.5);
+    }
 }
 
 .result-buttons {
@@ -380,6 +499,385 @@ body {
     font-size: 0.9rem;
 }
 
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%);
+    border-radius: 20px;
+    max-width: 90%;
+    max-height: 90%;
+    width: 800px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #a0aec0;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ff4655;
+}
+
+.modal-body {
+    padding: 30px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.troll-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.rarity-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rarity-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+.rarity-section.normal .rarity-section-title {
+    background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+}
+
+.rarity-section.rare .rarity-section-title {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+}
+
+.rarity-section.super-rare .rarity-section-title {
+    background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+}
+
+.rarity-section.ultra-rare .rarity-section-title {
+    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+}
+
+/* レジェンドの色をマゼンタに変更 */
+.rarity-section.legend,
+#trollListModal .rarity-section.legend {
+    border: 2px solid transparent !important;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 0, 255, 0.02) 25%, rgba(255, 20, 147, 0.02) 50%, rgba(255, 105, 180, 0.02) 75%, rgba(255, 0, 255, 0.02) 100%),
+        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-clip: padding-box, border-box !important;
+    animation: modal-legend-magenta 4s ease-in-out infinite !important;
+    position: relative !important;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3) !important;
+}
+
+.rarity-section.legend::before,
+#trollListModal .rarity-section.legend::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -2px !important;
+    left: -2px !important;
+    right: -2px !important;
+    bottom: -2px !important;
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-size: 400% 400% !important;
+    animation: magenta-shift 3s ease-in-out infinite !important;
+    z-index: -1 !important;
+    border-radius: 17px !important;
+    filter: blur(1px) !important;
+}
+
+.rarity-section.legend .rarity-section-title,
+#trollListModal .rarity-section.legend .rarity-section-title {
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-size: 400% 400% !important;
+    animation: magenta-shift 3s ease-in-out infinite, modal-legend-magenta-glow 2s ease-in-out infinite alternate !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    position: relative !important;
+    z-index: 1 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5) !important;
+}
+
+/* より具体的なセレクタを追加 */
+#trollListModal .rarity-section.legend {
+    border: 2px solid transparent !important;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 0, 255, 0.02) 25%, rgba(255, 20, 147, 0.02) 50%, rgba(255, 105, 180, 0.02) 75%, rgba(255, 0, 255, 0.02) 100%),
+        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-clip: padding-box, border-box !important;
+    animation: modal-legend-magenta 4s ease-in-out infinite !important;
+    position: relative !important;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3) !important;
+}
+
+#trollListModal .rarity-section.legend::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -2px !important;
+    left: -2px !important;
+    right: -2px !important;
+    bottom: -2px !important;
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-size: 400% 400% !important;
+    animation: magenta-shift 3s ease-in-out infinite !important;
+    z-index: -1 !important;
+    border-radius: 17px !important;
+    filter: blur(1px) !important;
+}
+
+#trollListModal .rarity-section.legend .rarity-section-title {
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-size: 400% 400% !important;
+    animation: magenta-shift 3s ease-in-out infinite, modal-legend-magenta-glow 2s ease-in-out infinite alternate !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    position: relative !important;
+    z-index: 1 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5) !important;
+}
+
+#trollListModal .troll-item.legend {
+    border: 2px solid transparent !important;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.05) 25%, rgba(255, 20, 147, 0.05) 50%, rgba(255, 105, 180, 0.05) 75%, rgba(255, 0, 255, 0.05) 100%),
+        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-clip: padding-box, border-box !important;
+    animation: modal-item-legend-magenta 3s ease-in-out infinite !important;
+    position: relative !important;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3) !important;
+}
+
+#trollListModal .troll-item.legend::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -2px !important;
+    left: -2px !important;
+    right: -2px !important;
+    bottom: -2px !important;
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-size: 400% 400% !important;
+    animation: magenta-shift 3s ease-in-out infinite !important;
+    z-index: -1 !important;
+    border-radius: 12px !important;
+    filter: blur(0.5px) !important;
+}
+
+#trollListModal .troll-item.legend:hover {
+    animation: modal-item-legend-magenta 1.5s ease-in-out infinite !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(255, 0, 255, 0.5) !important;
+}
+
+/* マゼンタ用のアニメーション */
+@keyframes magenta-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes modal-legend-magenta {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+    25% {
+        box-shadow: 0 0 15px rgba(255, 20, 147, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+    }
+    75% {
+        box-shadow: 0 0 15px rgba(218, 112, 214, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+}
+
+@keyframes modal-legend-magenta-glow {
+    from {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.4), 0 0 25px rgba(255, 0, 255, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(255, 0, 255, 0.6), 0 0 35px rgba(255, 0, 255, 0.3);
+    }
+}
+
+@keyframes modal-item-legend-magenta {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+    }
+    25% {
+        box-shadow: 0 0 8px rgba(255, 20, 147, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+    }
+    75% {
+        box-shadow: 0 0 8px rgba(218, 112, 214, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+    }
+}
+
+.troll-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.troll-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+}
+
+.troll-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.troll-item.normal {
+    border-left-color: #a0aec0;
+}
+
+.troll-item.rare {
+    border-left-color: #4299e1;
+}
+
+.troll-item.super-rare {
+    border-left-color: #9f7aea;
+}
+
+.troll-item.ultra-rare {
+    border-left-color: #f6ad55;
+}
+
+.troll-item.legend {
+    border: 2px solid transparent !important;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.05) 25%, rgba(255, 20, 147, 0.05) 50%, rgba(255, 105, 180, 0.05) 75%, rgba(255, 0, 255, 0.05) 100%),
+        linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-clip: padding-box, border-box !important;
+    animation: modal-item-legend-magenta 3s ease-in-out infinite !important;
+    position: relative !important;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3) !important;
+}
+
+.troll-item.legend::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -2px !important;
+    left: -2px !important;
+    right: -2px !important;
+    bottom: -2px !important;
+    background: linear-gradient(45deg, #ff00ff, #ff1493, #ff69b4, #da70d6, #dda0dd, #ee82ee, #dda0dd) !important;
+    background-size: 400% 400% !important;
+    animation: magenta-shift 3s ease-in-out infinite !important;
+    z-index: -1 !important;
+    border-radius: 12px !important;
+    filter: blur(0.5px) !important;
+}
+
+.troll-item.legend:hover {
+    animation: modal-item-legend-magenta 1.5s ease-in-out infinite !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(255, 0, 255, 0.5) !important;
+}
+
+@keyframes modal-item-legend-magenta {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+    }
+    25% {
+        box-shadow: 0 0 8px rgba(255, 20, 147, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+    }
+    75% {
+        box-shadow: 0 0 8px rgba(218, 112, 214, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+    }
+}
+
+.troll-item-text {
+    color: #ffffff;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .title {
@@ -417,6 +915,45 @@ body {
     .setup-section, .result-section, .how-to-section {
         padding: 25px;
     }
+    
+    .troll-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .team-member {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .agent-info {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .agent-image {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-height: 95%;
+    }
+    
+    .modal-header {
+        padding: 20px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .troll-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -434,6 +971,27 @@ body {
     
     .section-title {
         font-size: 1.5rem;
+    }
+    
+    .agent-image {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .agent-name {
+        font-size: 0.7rem;
+    }
+    
+    .modal-title {
+        font-size: 1.2rem;
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
     }
 }
 
